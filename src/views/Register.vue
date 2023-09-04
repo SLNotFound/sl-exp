@@ -24,7 +24,7 @@
         ]"
       />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit">注册</van-button>
+        <van-button round block type="primary" native-type="submit">注册</van-button>
       </div>
     </van-form>
     <router-link class="link" to="/login">已有账号，返回登录页</router-link>
