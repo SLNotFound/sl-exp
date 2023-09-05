@@ -11,7 +11,7 @@
       >
       <div class="logo"><img src="@/assets/logo.png" alt=""></div>
     </nav>
-    <ArticleItem></ArticleItem>
+    <ArticleItem v-for="item in list" :key="item.id" :item="item"></ArticleItem>
   </div>
 </template>
 
@@ -22,15 +22,17 @@ export default {
   name: 'article-page',
   data () {
     return {
-
+      list: [],
+      current: 1,
+      sorter: 'weight_desc'
     }
   },
   async created () {
-    const res = await getArticles({
-      current: 1,
-      sorter: 'weight_desc'
+    const { data } = await getArticles({
+      current: this.current,
+      sorter: this.sorter
     })
-    console.log(res)
+    this.list = data.rows
   },
   methods: {
 
