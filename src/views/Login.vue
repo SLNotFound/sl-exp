@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { login } from '@/api/user'
+
 export default {
   name: 'LoginPage',
   data () {
@@ -41,8 +43,12 @@ export default {
     }
   },
   methods: {
-    onSubmit (values) {
-      console.log('submit', values)
+    async onSubmit (values) {
+      const res = await login(values)
+      if (res.status === 200) {
+        this.$toast.success(res.data.message)
+        this.$router.push('/')
+      }
     }
   }
 }
