@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { Toast } from 'vant'
 
 const instance = axios.create({
   baseURL: 'http://interview-api-t.itheima.net/h5/',
@@ -20,6 +21,7 @@ instance.interceptors.response.use(function (response) {
   return response
 }, function (error) {
   // 对响应错误做点什么
+  Toast.fail(error.response.data.message)
   return Promise.reject(error)
 })
 

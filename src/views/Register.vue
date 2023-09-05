@@ -48,15 +48,10 @@ export default {
         message: '拼命加载中...',
         forbidClick: true
       })
+      await register(values)
 
-      try {
-        await register(values)
-
-        this.$toast.success('注册成功')
-        this.$router.push('/login')
-      } catch (error) {
-        this.$toast.fail('注册失败')
-      }
+      this.$toast.success('注册成功')
+      this.$router.push('/login')
     }
   }
 }
