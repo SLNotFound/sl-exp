@@ -10,6 +10,8 @@ import Collect from '@/views/Collect'
 import Like from '@/views/Like'
 import My from '@/views/User'
 
+import { getToken } from '@/utils/storage'
+
 Vue.use(VueRouter)
 
 const router = new VueRouter({
@@ -29,6 +31,21 @@ const router = new VueRouter({
       ]
     }
   ]
+})
+
+const whiteList = ['/login', '/register']
+
+router.beforeEach((to, from, next) => {
+  const token = getToken()
+  if (token) {
+    next()
+  } else {
+    if (whiteList.includes(to.path)) {
+      next()
+    } else {
+      next('/login')
+    }
+  }
 })
 
 export default router
