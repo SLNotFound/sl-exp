@@ -44,11 +44,10 @@ export default {
   },
   methods: {
     async onSubmit (values) {
-      const res = await login(values)
-      if (res.status === 200) {
-        this.$toast.success(res.data.message)
-        this.$router.push('/')
-      }
+      const { data } = await login(values)
+      this.$toast('登录成功')
+      localStorage.setItem('vant-mobile-exp-token', data.data.token)
+      console.log(data.data.token)
     }
   }
 }
