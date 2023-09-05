@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import request from '@/utils/request'
+import { register } from '@/api/user'
 
 export default {
   name: 'RegisterPage',
@@ -44,8 +44,19 @@ export default {
   },
   methods: {
     async onSubmit (values) {
-      const res = request.post('user/register', values)
-      console.log(res)
+      this.$toast.loading({
+        message: '拼命加载中...',
+        forbidClick: true
+      })
+
+      try {
+        await register(values)
+
+        this.$toast.success('注册成功')
+        this.$router.push('/login')
+      } catch (error) {
+        this.$toast.fail('注册失败')
+      }
     }
   }
 }
