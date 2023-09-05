@@ -12,10 +12,6 @@
       <div class="logo"><img src="@/assets/logo.png" alt=""></div>
     </nav>
     <ArticleItem></ArticleItem>
-    <ArticleItem></ArticleItem>
-    <ArticleItem></ArticleItem>
-    <ArticleItem></ArticleItem>
-    <ArticleItem></ArticleItem>
   </div>
 </template>
 

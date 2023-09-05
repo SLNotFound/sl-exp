@@ -1,5 +1,7 @@
 import axios from 'axios'
 import { Toast } from 'vant'
+import { getToken, delToken } from './storage'
+import router from '@/router/index'
 
 const instance = axios.create({
   baseURL: 'http://interview-api-t.itheima.net/h5/',
@@ -9,6 +11,10 @@ const instance = axios.create({
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
   // 在发送请求之前做些什么
+  const token = getToken()
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
+  }
   return config
 }, function (error) {
   // 对请求错误做些什么
@@ -18,10 +24,17 @@ instance.interceptors.request.use(function (config) {
 // 添加响应拦截器
 instance.interceptors.response.use(function (response) {
   // 对响应数据做点什么
-  return response
+  return response.data
 }, function (error) {
   // 对响应错误做点什么
-  Toast.fail(error.response.data.message)
+  if (error.response) {
+    if (error.response.status === 401) {
+      delToken()
+      router.push('/login')
+    } else {
+      Toast(error.response.data.message)
+    }
+  }
   return Promise.reject(error)
 })
 
