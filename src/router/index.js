@@ -1,16 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '@/views/Login'
-import Detail from '@/views/Detail'
-import Register from '@/views/Register'
-import Layout from '@/views/Layout'
-
-import Article from '@/views/Article'
-import Collect from '@/views/Collect'
-import Like from '@/views/Like'
-import My from '@/views/User'
-
 import { getToken } from '@/utils/storage'
+
+const Login = () => import('@/views/Login')
+const Detail = () => import('@/views/Detail')
+const Register = () => import('@/views/Register')
+const Layout = () => import('@/views/Layout')
+
+const Article = () => import('@/views/Article')
+const Collect = () => import('@/views/Collect')
+const Like = () => import('@/views/Like')
+const My = () => import('@/views/User')
 
 Vue.use(VueRouter)
 
