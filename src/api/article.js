@@ -15,3 +15,16 @@ export const getArticles = (obj) => {
     }
   })
 }
+
+export const getDetail = (id) => {
+  const token = getToken()
+
+  return request.get('/interview/show', {
+    params: {
+      id
+    },
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+}
