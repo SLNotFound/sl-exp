@@ -42,3 +42,23 @@ export const updateCollect = (id) => {
     optType: 2
   })
 }
+
+export const getArticlesCollect = (obj) => {
+  return request.get('/interview/opt/list', {
+    params: {
+      page: obj.page,
+      pageSize: 5,
+      optType: 2
+    }
+  })
+}
+
+export const getArticlesLike = (obj) => {
+  return request.get('/interview/opt/list', {
+    params: {
+      page: obj.page,
+      pageSize: 5,
+      optType: 2
+    }
+  })
+}
