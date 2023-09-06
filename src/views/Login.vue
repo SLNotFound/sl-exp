@@ -46,7 +46,7 @@ export default {
   methods: {
     async onSubmit (values) {
       const { data } = await login(values)
-      setToken(data.data.token)
+      setToken(data.token)
       this.$toast('登录成功')
       this.$router.push('/')
     }
