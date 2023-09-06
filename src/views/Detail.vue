@@ -18,14 +18,14 @@
     </header>
     <main class="body" v-html="article.content"></main>
     <div class="opt">
-      <van-icon class="active" name="like-o"/>
-      <van-icon name="star-o"/>
+      <van-icon @click="toggleLike" :class="{ active:article.likeFlag }" name="like-o"/>
+      <van-icon @click="toggleCollect" :class="{ active:article.collectFlag }" name="star-o"/>
     </div>
   </div>
 </template>
 
 <script>
-import { getDetail } from '@/api/article'
+import { getDetail, updateCollect, updateLike } from '@/api/article'
 
 export default {
   name: 'detail-page',
@@ -35,11 +35,31 @@ export default {
     }
   },
   async created () {
+    this.article = {}
     const { data } = await getDetail(this.$route.params.id)
     this.article = data
   },
   methods: {
-
+    async toggleLike () {
+      await updateLike(this.article.id)
+      this.article.likeFlag = !this.article.likeFlag
+      if (this.article.likeFlag) {
+        this.article.likeCount++
+        this.$toast.success('点赞成功')
+      } else {
+        this.article.likeCount--
+        this.$toast.success('取消点赞')
+      }
+    },
+    async toggleCollect () {
+      await updateCollect(this.article.id)
+      this.article.collectFlag = !this.article.collectFlag
+      if (this.article.collectFlag) {
+        this.$toast.success('收藏成功')
+      } else {
+        this.$toast.success('取消收藏')
+      }
+    }
   }
 }
 </script>

@@ -28,3 +28,17 @@ export const getDetail = (id) => {
     }
   })
 }
+
+export const updateLike = (id) => {
+  return request.post('/interview/opt', {
+    id,
+    optType: 1
+  })
+}
+
+export const updateCollect = (id) => {
+  return request.post('/interview/opt', {
+    id,
+    optType: 2
+  })
+}
