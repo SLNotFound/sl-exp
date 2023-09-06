@@ -11,7 +11,14 @@
       >
       <div class="logo"><img src="@/assets/logo.png" alt=""></div>
     </nav>
-    <ArticleItem v-for="item in list" :key="item.id" :item="item"></ArticleItem>
+    <van-list
+      v-model="loading"
+      :finished="finished"
+      finished-text="没有更多了"
+      @load="onLoad"
+    >
+      <ArticleItem v-for="item in list" :key="item.id" :item="item"></ArticleItem>
+    </van-list>
   </div>
 </template>
 
@@ -24,18 +31,32 @@ export default {
     return {
       list: [],
       current: 1,
-      sorter: 'weight_desc'
+      sorter: 'weight_desc',
+      loading: false,
+      finished: false
     }
   },
   async created () {
-    const { data } = await getArticles({
-      current: this.current,
-      sorter: this.sorter
-    })
-    this.list = data.rows
+    // const { data } = await getArticles({
+    //   current: this.current,
+    //   sorter: this.sorter
+    // })
+    // this.list = data.rows
   },
   methods: {
+    async onLoad () {
+      const { data } = await getArticles({
+        current: this.current,
+        sorter: this.sorter
+      })
+      this.list.push(...data.rows)
+      this.loading = false
+      this.current++
 
+      if (this.current > data.pageTotal) {
+        this.finished = true
+      }
+    }
   }
 }
 </script>

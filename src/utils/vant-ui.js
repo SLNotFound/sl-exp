@@ -1,6 +1,7 @@
 import Vue from 'vue'
-import { Cell, Button, Tabbar, TabbarItem, Form, Field, NavBar, Toast } from 'vant'
+import { List, Cell, Button, Tabbar, TabbarItem, Form, Field, NavBar, Toast } from 'vant'
 
+Vue.use(List)
 Vue.use(Cell)
 Vue.use(Button)
 Vue.use(Tabbar)
