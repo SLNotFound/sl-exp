@@ -17,7 +17,7 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   routes: [
     { path: '/login', component: Login },
-    { path: '/detail/:id', component: Detail },
+    { path: '/article/:id', component: Detail },
     { path: '/register', component: Register },
     {
       path: '/',
